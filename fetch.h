@@ -55,7 +55,26 @@ printf("%sProcessor Architecture:%s %s\n", COLOR, RESET, sysinfo.machine);
 }
 
 void gpu(){
-printf("%sGraphics Card:%s potato\n", COLOR, RESET);
+        // I mean.. it works
+    FILE *read = fopen("gpu.txt", "r");
+        if (!read){
+        FILE *pci = popen("lspci | grep -i 'Display\\|VGA\\|2D\\|3D' | awk -F ': ' '{print $2}'", "r");
+        char *buff = malloc(256 * sizeof(char));
+        fgets(buff, 256, pci);
+        FILE *fw = fopen("gpu.txt", "w");
+        fprintf(fw, "%s", buff);
+        free(buff);
+        fclose(fw);
+        pclose(pci);
+}
+    read = fopen("gpu.txt", "r");
+    char *buffer = malloc(256 * sizeof(char));
+    fgets(buffer, 256, read);
+    buffer[strcspn(buffer, "\n")] = 0;
+    printf("%sGraphics Card:%s %s\n", COLOR, RESET, buffer);
+    //free(buffer);
+    fclose(read);
+    
 }
 
 void uptime(){
