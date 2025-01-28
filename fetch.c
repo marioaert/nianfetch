@@ -7,6 +7,14 @@ const char* PKG = "unknown";
 int main(){
 struct utsname sysinfo;
 uname(&sysinfo);
+const char *logo1[] = {
+"\\/",
+"//",
+"\\\\",
+"  ",
+"  ",
+"  "
+};
 const char *arch[] = {
 "         /\\           ",
 "        /  \\          ",
@@ -42,8 +50,18 @@ const char *debian[] = {
 " \\           ",
 "  -_         ",
 "    -_       "
-
-
+};
+const char *ubuntu[] = {
+"               ",
+"         _     ",
+"    _---(_)    ",
+"   /  ___  \\   ",
+" _/  /   \\  \\  ",
+"(_) |     | |  ",
+"  \\  \\___/  /  ",
+"   \\      _/   ",
+"    ^----(_)   ",
+"               "
 };
 const char *defaultlogo[] = {
  "____________   ",
@@ -73,7 +91,11 @@ if (strstr(buffer, "Arch Linux")){
         logo = debian;
         COLOR = RED; 
         PKG = "apt";break;
-  }
+ } else if (strstr(buffer, "Ubuntu")){
+        logo = ubuntu;
+        COLOR = ORANGE; 
+        PKG = "apt";break;
+ }
 }
 free(buffer);
 fclose(osname);
