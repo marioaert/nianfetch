@@ -5,10 +5,12 @@
 #include <sys/sysinfo.h>
 #define BLUE "\033[1;34m"
 #define PURPLE "\033[1;35m"
+#define RED "\033[1;31m"
 #define RESET "\033[0m"
 
 extern const char* COLOR;
 extern const char* PKG;
+
 void pretty(){
 FILE *osname = fopen("/etc/os-release", "r");
 char *buffer = malloc(256 * sizeof(char));
@@ -56,23 +58,27 @@ printf("%sProcessor Architecture:%s %s\n", COLOR, RESET, sysinfo.machine);
 
 void gpu(){
         // I mean.. it works
-    FILE *read = fopen("gpu.txt", "r");
+    char *userpath = malloc(256 * sizeof(char));
+    sprintf(userpath, "/home/%s/gpu.txt", getenv("USER"));
+    FILE *read = fopen(userpath, "r");
+    
         if (!read){
         FILE *pci = popen("lspci | grep -i 'Display\\|VGA\\|2D\\|3D' | awk -F ': ' '{print $2}'", "r");
         char *buff = malloc(256 * sizeof(char));
         fgets(buff, 256, pci);
-        FILE *fw = fopen("gpu.txt", "w");
+        FILE *fw = fopen(userpath, "w");
         fprintf(fw, "%s", buff);
         free(buff);
         fclose(fw);
         pclose(pci);
 }
-    read = fopen("gpu.txt", "r");
+    read = fopen(userpath,"r");
     char *buffer = malloc(256 * sizeof(char));
     fgets(buffer, 256, read);
     buffer[strcspn(buffer, "\n")] = 0;
     printf("%sGraphics Card:%s %s\n", COLOR, RESET, buffer);
-    //free(buffer);
+    free(userpath);
+    free(buffer);
     fclose(read);
     
 }
@@ -105,4 +111,3 @@ void getuser(){
 const char *user = getenv("USER");
 printf("%sCurrent User:%s %s\n", COLOR, RESET, user);
 }
-
