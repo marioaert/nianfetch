@@ -7,14 +7,6 @@ const char* PKG = "unknown";
 int main(){
 struct utsname sysinfo;
 uname(&sysinfo);
-const char *logo1[] = {
-"\\/",
-"//",
-"\\\\",
-"  ",
-"  ",
-"  "
-};
 const char *arch[] = {
 "         /\\           ",
 "        /  \\          ",
@@ -26,6 +18,32 @@ const char *arch[] = {
 "  /     /  \\     \\    ",
 " /     |    |     \\   ",
 "/_____/      \\_____\\  "
+};
+const char *gentoo[] = {
+" _-------_          ",
+"(         -_        ",
+"\\       _   -_      ",
+" \\     / \\    -     ",
+"  \\    \\_/     )    ",
+"  /            /    ",
+" /           _-     ",
+"/          _-       ",
+"(        _-         ",
+"\\_______-           "
+
+};
+const char *debian[] = {
+"   _-----_   ",
+"  /       \\  ",
+" /    __  |  ",
+"(    /    /  ",
+"\\    (___/   ",
+"\\            ",
+" \\           ",
+"  -_         ",
+"    -_       "
+
+
 };
 const char *defaultlogo[] = {
  "____________   ",
@@ -44,10 +62,18 @@ FILE *osname = fopen("/etc/os-release", "r");
 char *buffer = malloc(256 * sizeof(char));
 while (fgets(buffer, 25, osname)){
 if (strstr(buffer, "Arch Linux")){
-	logo = arch;
-	COLOR = BLUE; 
-	PKG = "pacman";break;
- }
+        logo = arch;
+        COLOR = BLUE; 
+        PKG = "pacman";break;
+ } else if (strstr(buffer, "Gentoo")){
+        logo = gentoo;
+        COLOR = PURPLE; 
+        PKG = "portage";break;
+ } else if (strstr(buffer, "Debian")){
+        logo = debian;
+        COLOR = RED; 
+        PKG = "apt";break;
+  }
 }
 free(buffer);
 fclose(osname);
