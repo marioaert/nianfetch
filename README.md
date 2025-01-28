@@ -1,6 +1,8 @@
 # nianfetch
 nianfetch - a simple information fetcher
 
+All The ascii art is Made by me
+
 !STILL IN DEVELOPMENT!
 
 ![Preview](https://github.com/marioaert/nianfetch/blob/main/preview.png)
