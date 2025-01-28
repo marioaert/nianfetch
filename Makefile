@@ -1,2 +1,2 @@
 main:
-	gcc -o nianfetch fetch.c fetch.h
+	$(CC) -o nianfetch fetch.c fetch.h
