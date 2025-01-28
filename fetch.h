@@ -6,6 +6,7 @@
 #define BLUE "\033[1;34m"
 #define PURPLE "\033[1;35m"
 #define RED "\033[1;31m"
+#define ORANGE "\033[33m"
 #define RESET "\033[0m"
 
 extern const char* COLOR;
