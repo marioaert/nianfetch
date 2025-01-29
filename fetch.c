@@ -63,6 +63,18 @@ const char *ubuntu[] = {
 "    ^----(_)   ",
 "               "
 };
+const char *mint[] = {
+" ___________________    ",
+"|                   \\   ",
+"|_  ||  ___     ___  |  ",
+"  | || |   \\___/   | |  ",
+"  | || |           | |  ",
+"  | || |   |   |   | |  ",
+"  | || |   |___|   | |  ",
+"  | || |___|   |___| |  ",
+"  ( \\\\____________/  |  ",
+"  \\__________________|  "
+};
 const char *defaultlogo[] = {
  "____________   ",
  "|          |   ",
@@ -95,7 +107,10 @@ if (strstr(buffer, "Arch Linux")){
         logo = ubuntu;
         COLOR = ORANGE; 
         PKG = "apt";break;
- }
+ } else if (strstr(buffer, "Linux Mint")){
+        logo = mint;
+ }      COLOR = GREEN;
+        PKG = "apt";break;
 }
 free(buffer);
 fclose(osname);
