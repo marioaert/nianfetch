@@ -75,6 +75,18 @@ const char *mint[] = {
 "  ( \\\\____________/  |  ",
 "  \\__________________|  "
 };
+const char *manjaro[] = {
+" ____________   ____   ",
+"|            | |    |  ",
+"|            | |    |  ",
+"|      ______| |    |  ",
+"|     |  ____  |    |  ",
+"|     | |    | |    |  ",
+"|     | |    | |    |  ",
+"|     | |    | |    |  ",
+"|     | |    | |    |  ",
+"|_____| |____| |____|  "
+};
 const char *defaultlogo[] = {
  "____________   ",
  "|          |   ",
@@ -90,7 +102,7 @@ const char *defaultlogo[] = {
 const char **logo = defaultlogo;
 FILE *osname = fopen("/etc/os-release", "r");
 char *buffer = malloc(256 * sizeof(char));
-while (fgets(buffer, 25, osname)){
+while (fgets(buffer, 255, osname)){
 if (strstr(buffer, "Arch Linux")){
         logo = arch;
         COLOR = BLUE; 
@@ -109,8 +121,13 @@ if (strstr(buffer, "Arch Linux")){
         PKG = "apt";break;
  } else if (strstr(buffer, "Linux Mint")){
         logo = mint;
- }      COLOR = GREEN;
+        COLOR = GREEN;
         PKG = "apt";break;
+ } else if (strstr(buffer, "Manjaro")){
+        logo = manjaro;
+        COLOR = LIGHTGREEN;
+        PKG = "pacman";break;
+ }
 }
 free(buffer);
 fclose(osname);
