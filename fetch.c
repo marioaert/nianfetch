@@ -87,6 +87,18 @@ const char *manjaro[] = {
 "|     | |    | |    |  ",
 "|_____| |____| |____|  "
 };
+const char *slackware[] = {
+"    _----------_      ",
+"   |    _____   |     ",
+"  /    /     \\   \\    ",
+" |    /  ____/    |   ",
+"/     \\___  \\      \\  ",
+"|      ___\\  \\     |  ",
+" \\   ||      /    /   ",
+"  |  ||_____/    |    ",
+"   \\ |________  /     ",
+"    |-________-|      "
+};
 const char *defaultlogo[] = {
  "____________   ",
  "|          |   ",
@@ -127,6 +139,10 @@ if (strstr(buffer, "Arch Linux")){
         logo = manjaro;
         COLOR = LIGHTGREEN;
         PKG = "pacman";break;
+ } else if (strstr(buffer, "Slackware")){
+        logo = slackware;
+        COLOR = DARKBLUE;
+        PKG = "none";
  }
 }
 free(buffer);
